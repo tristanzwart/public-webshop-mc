@@ -1,0 +1,47 @@
+ 
+<body onkeydown="get_key(event)">
+    <style>
+        html,
+		body,
+		main {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			overflow: hidden;
+		}
+        .spel {
+			width: 100%;
+			height: 100%;
+		}
+
+    </style>
+        <div id="spel" class="spel"></div>
+    <script>
+        var verschuiving = 10;
+
+        class Vijand {
+            //TODO: genereren vanaf het midden en dan naat buiten toe tot aan x pixels van de zijkant
+            //TODO: ??
+            //hier variabelen in voor de class
+            geraakt;
+            x;
+            y;
+            verschuiving = 20;
+        }
+        var vijanden = [];
+        //50 voor aantal vijanden
+        for(var i = 0; i < 50; i++) {
+            vijanden[i] = new Vijand;
+            vijanden[i].geraakt = false;
+            vijanden[i].x = i * (50 + verschuiving);
+            vijanden[i].y = 25;
+            document.getElementById('spel').innerHTML += '<div id="vijand' + i + '" style="position:absolute;left:' + vijanden[i].x + 'px;top:' + vijanden[i].y + 'px;height: 50px;width: 50px;background-color: red"></div>';
+        }
+        console.log(vijanden);
+
+        
+    </script>
+
+
+
+</body>
