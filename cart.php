@@ -36,30 +36,40 @@
     <?php
         
         $winkelwagen = &$_SESSION["winkelwagen"];
+
+        //TODO: Items verwijderen
+        // gebruik unset ($varnaam[item]);
+
+        if(isset($_POST["verwijder-naam"])){
+            unset ($winkelwagen[$_POST["verwijder-naam"]]);
+        }
         
         if (isset($winkelwagen)){
             foreach ($winkelwagen as $item_naam => $hoeveelheid){
 
                 //TODO: Haal prijs uit database --> shop.php
-                echo "
+                echo '
                 <tr>
                     <th>
-                        " . $item_naam . "
+                        ' . $item_naam . '
                     </th>
                     <th>
-                        " . $hoeveelheid . "
+                        ' . $hoeveelheid . '
                     </th>
                     <th>
                         nog iets
+                        <form method="post">
+                            <input type="hidden" name="verwijder-naam" value="' . $item_naam . '">
+                            <input type="submit" value="Verwijder item">
+                        </form>
                     </th>
-                </tr>";
+                </tr>';
             }
         }else{
             //TODO: voeg nog een lege winkel wagen stijl iets toe
         }
 
-        //TODO: Items verwijderen
-        // gebruik unset ($varnaam[item]);
+        
 
         //TODO: Item hoeveelheid direct aapassen
     
