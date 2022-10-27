@@ -54,7 +54,7 @@
                         ' . $item_naam . '
                     </th>
                     <th>
-                        ' . $hoeveelheid . '
+                        <input type="number" value="' . $hoeveelheid . '" name="hoeveelheid" min="1" max="1000">
                     </th>
                     <th>
                         nog iets
@@ -78,3 +78,11 @@
         //session_destroy();
     ?>    
 </table>
+<script>
+    const input = document.querySelector('input');
+    input.addEventListener('input', update_hoeveelheid);
+    function update_hoeveelheid(e){
+        console.log(e.target.value);
+        //TODO: xml httprequest for send var to php
+    }
+</script>
