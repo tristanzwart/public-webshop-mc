@@ -3,4 +3,3 @@ set path=%path%;L:/git/bin/
 set /p commitmsg=commit bericht: 
 git add *
 git commit -a -m "%commitmsg%"^
-pause
