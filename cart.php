@@ -52,10 +52,10 @@
 
         
         if (isset($winkelwagen)){
-            var_dump($_SESSION["winkelwagen"]);
             foreach ($winkelwagen as $item_naam => $hoeveelheid){
 
                 //TODO: Haal prijs uit database --> shop.php
+                //FIXME: Als het form 1 keer gesubmit wordt breekt de javascript
                 echo '
                 <tr>
                     <th>
@@ -64,9 +64,9 @@
                     <th>
                         <form method="post" id="' . $item_naam . '" action="index.php?p=cart">
                             <!-- TODO: Pas de knopen van hoeveelheid aan via javascript naar een + en - -->
-                            <button onclick="minder()">-</button>
-                            <input class="amount" type="number" onchange="update_hoeveelheid(document.getElementById(\'' . $item_naam . '\'))" value="' . $hoeveelheid . '" name="hoeveelheid" min="1" max="1000">
-                            <button onclick="meer()">+</button>
+                            <button onclick="minder(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">-</button>
+                            <input class="amount" type="number" id="' . $item_naam . 'veld" onchange="update_hoeveelheid(document.getElementById(\'' . $item_naam . '\'))" value="' . $hoeveelheid . '" name="hoeveelheid" min="1" max="1000">
+                            <button onclick="meer(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">+</button>
                             <input type="hidden" name="item_naam" value="' . $item_naam . '">
                             <!--<input type="submit" value="Opslaan">-->
                         </form>
@@ -103,13 +103,26 @@
         oReq.send(new FormData(id));
     }
 
-    //TODO: + of - code javascript
-    function meer(){
+    //+ of - code javascript    TODO: Ook meteen versuren met ajax
+    function meer(veld, send){
+        document.getElementById(veld).value++;
+
+        id = document.getElementById(send);
+        var oReq = new XMLHttpRequest();
+        oReq.onload = console.log("Hoeveelheid versuurt");
+        oReq.open("post", id.action, true);
+        oReq.send(new FormData(id));
 
     }
 
-    function minder(){
+    function minder(veld, send){
+        document.getElementById(veld).value--;
 
+        id = document.getElementById(send);
+        var oReq = new XMLHttpRequest();
+        oReq.onload = console.log("Hoeveelheid versuurt");
+        oReq.open("post", id.action, true);
+        oReq.send(new FormData(id));
     }
 
     //opvangen in php met $_POST["hoeveelheid"] en $_POST["item_naam"]

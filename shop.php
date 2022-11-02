@@ -73,7 +73,6 @@
 </nav>
 
 <script>
-    //TODO: switch to sesion php
   	//function coookie(item_id, hoeveelheid, dagen_verval) {
       //var d = new Date();
       //d.setTime(d.getTime() + (dagen_verval*24*60*60*1000));
