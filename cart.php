@@ -129,7 +129,10 @@
     body.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
-        //TODO: versuur alsnog de form alleen dan via ajax
+        
+        
+        //box unfocusen als enter wordt ingedrukt en verzend daardoor via ajax
+        document.activeElement.blur();
       }
     });
 
