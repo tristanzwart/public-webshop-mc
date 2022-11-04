@@ -21,18 +21,7 @@
 
 <h1>Winkelwagen</h1>
 
-<table>
-    <tr>
-        <th>
-            item
-        </th>
-        <th>
-            hoeveelheid
-        </th>
-        <th>
-            prijs
-        </th>
-    </tr>
+
     <?php
         
         $winkelwagen = &$_SESSION["winkelwagen"];
@@ -52,39 +41,58 @@
 
         
         if (isset($winkelwagen)){
-            foreach ($winkelwagen as $item_naam => $hoeveelheid){
-
-                //TODO: Haal prijs uit database --> shop.php
+            if ( !empty(array_filter($winkelwagen))) {
                 echo '
-                <tr>
-                    <th>
-                        ' . $item_naam . '
-                    </th>
-                    <th>
-                        <form method="post" id="' . $item_naam . '" action="index.php?p=cart">
-                            <button onclick="minder(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">-</button>
-                            <input class="amount" type="number" id="' . $item_naam . 'veld" onchange="update_hoeveelheid(document.getElementById(\'' . $item_naam . '\'))" value="' . $hoeveelheid . '" name="hoeveelheid" min="1" max="1000">
-                            <button onclick="meer(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">+</button>
-                            <input type="hidden" name="item_naam" value="' . $item_naam . '">
-                            <!--<input type="submit" value="Opslaan">-->
-                        </form>
-                    </th>
-                    <th>
-                        nog iets
-                        <form method="post">
-                            <input type="hidden" name="verwijder-naam" value="' . $item_naam . '">
-                            <input type="submit" value="Verwijder item">
-                        </form>
-                    </th>
-                </tr>';
+                <table>
+                    <tr>
+                        <th>
+                            item
+                        </th>
+                        <th>
+                            hoeveelheid
+                        </th>
+                        <th>
+                            prijs
+                        </th>
+                    </tr>';
+                foreach ($winkelwagen as $item_naam => $hoeveelheid){
+
+                    echo '
+                    <tr>
+                        <th>
+                            ' . $item_naam . '
+                        </th>
+                        <th>
+                            <form method="post" id="' . $item_naam . '" action="index.php?p=cart">
+                                <button onclick="minder(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">-</button>
+                                <input class="amount" type="number" id="' . $item_naam . 'veld" onchange="update_hoeveelheid(document.getElementById(\'' . $item_naam . '\'))" value="' . $hoeveelheid . '" name="hoeveelheid" min="1" max="1000">
+                                <button onclick="meer(`' . $item_naam . 'veld`, `' . $item_naam . '`)" type="button">+</button>
+                                <input type="hidden" name="item_naam" value="' . $item_naam . '">
+                                <!--<input type="submit" value="Opslaan">-->
+                            </form>
+                        </th>
+                        <th>
+                            nog iets
+                            <form method="post">
+                                <input type="hidden" name="verwijder-naam" value="' . $item_naam . '">
+                                <input type="submit" value="Verwijder item">
+                            </form>
+                        </th>
+                    </tr>';
+                }
+                echo '</table>';
+            } else {
+                //TODO: Hier een pagina toeveoegen voor een lege winkelwagen
+                echo 'De winkelwagen is leeg';
             }
+
         }else{
-            //TODO: voeg nog een lege winkel wagen stijl iets toe
+            //TODO: Hier een pagina toeveoegen voor een lege winkelwagen die ook hier
+            echo 'De winkelwagen is leeg';
         }
 
-        
-
-        //TODO: Item hoeveelheid direct aapassen
+        //TODO: Voeg een msql functie toe
+        //TODO: Haal prijs uit database --> shop.php
     
         //var_dump($_SESSION["winkelwagen"]);
         //var_dump($winkelwagen);
@@ -135,7 +143,4 @@
         document.activeElement.blur();
       }
     });
-
-    //opvangen in php met $_POST["hoeveelheid"] en $_POST["item_naam"]
-    //Vervolgens de aray aan passen
 </script>
