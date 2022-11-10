@@ -1,0 +1,20 @@
+{
+    "name": "public-webshop-mc",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "build": "echo \"No build specified\" && exit 1",
+        "test": "echo \"No test specified\" && exit 1",
+        "start": "index.php"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tristanzwart/public-webshop-mc.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/tristanzwart/public-webshop-mc/issues"
+    },
+    "homepage": "https://github.com/tristanzwart/public-webshop-mc#readme"
+}
